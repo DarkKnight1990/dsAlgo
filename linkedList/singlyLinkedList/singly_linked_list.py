@@ -42,40 +42,36 @@ class LinkedList:
     b) After a given node
     c) At the end of the LinkedList
     """
-    def push(self, new_node):
+    def push(self, new_data):
         """
-        Pushes the new_node at the front of the LinkedList
+        Pushes the new_data at the front of the LinkedList as a Node
         """
-        if not isinstance(new_node, Node):
-            print("New node to be added should be of type: Node,\
-            so not pushing the node")
-            return
         if not self._head:
-            """ Set the new_node as the head of the LinkedList """
-            self.set_head(new_node)
+            """ Set the new_data as the head of the LinkedList """
+            self.set_head(Node(new_data))
             return
+        new_node = Node(new_data)
         new_node.set_next(self.get_head())
         self.set_head(new_node)
         return
 
-    def insert_after(self, prev_node, new_node):
+    def insert_after(self, prev_node, new_data):
         """
         Inserts the new_node after the prev_node
         """
-        if not isinstance(new_node, Node):
-            print("New node is not of type Node")
+        if not isinstance(prev_node, Node):
+            print("Previous node is not of type Node")
             return
+        new_node = Node(new_data)
         new_node.set_next(prev_node.get_next())
         prev_node.set_next(new_node)
         return
 
-    def insert_end(self, new_node):
+    def insert_end(self, new_data):
         """
         Inserts the new_node at the end of LinkedList
         """
-        if not isinstance(new_node, Node):
-            print("New node is not of type Node")
-            return
+        new_node = Node(new_data)
         if not self._head:
             """ Set the new_node as the head of the LinkedList """
             self.set_head(new_node)
@@ -87,8 +83,62 @@ class LinkedList:
         curr_node.set_next(new_node)
         return
 
+    def delete_node(self, key):
+        """
+        Given a key delete the first occurence of the key in the
+        LinkedList
+        """
+        found = False
+        prev_node = None
+        curr_node = self.get_head()
+        if not curr_node:
+            print("LinkedList is not initialised")
+            return self
+        if not curr_node.get_next() and curr_node.get_data() == key:
+            print("Single node in the linked list. And the key matches")
+            self.set_head(None)
+            return self
+        while(curr_node):
+            if curr_node.get_data() == key:
+                """
+                If this condition matches, then curr_node is the node
+                to be deleted
+                """
+                found = True
+                break
+            prev_node = curr_node
+            curr_node = curr_node.get_next()
+        if found:
+            prev_node.set_next(curr_node.get_next())
+            curr_node = None
+        return self
 
-
+    def delete_pos(self, pos):
+        """
+        Delete the node present at the given position
+        """
+        found = False
+        prev_node = None
+        curr_node = self.get_head()
+        curr_pos = 0 # If we consider pos starts from 0
+        if not curr_node:
+            print("LinkedList is not initialised")
+            return self
+        if curr_pos == 0 and curr_node.get_next() is None:
+            print("Single node in the linked list. We are deleting the head")
+            self.set_head(None)
+            return self
+        while(curr_node):
+            if curr_pos == pos:
+                found = True
+                break
+            curr_pos = curr_pos + 1
+            prev_node = curr_node
+            curr_node = curr_node.get_next()
+        if found:
+            prev_node.set_next(curr_node.get_next())
+            curr_node = None
+        return self
 
 
 if __name__ == "__main__":
@@ -104,16 +154,16 @@ if __name__ == "__main__":
     llist.printList()
     print("*" * 20)
     print("Adding a new node at the front of the list")
-    new_node = Node("new_data")
+    new_node = "new_data"
     llist.push(new_node)
     llist.printList()
     print("*" * 20)
     print("Insert a new node after second")
-    another_new_node = Node("Something new")
+    another_new_node = "Something new"
     llist.insert_after(second, another_new_node)
     llist.printList()
     print("*" * 20)
     print("Insert at end")
-    last_new_node = Node("Last")
+    last_new_node = "Last"
     llist.insert_end(last_new_node)
     llist.printList()
