@@ -15,5 +15,19 @@ def test_delete_node():
     print("*" * 20)
     llist.printList()
 
+def test_search_node():
+    llist = LinkedList()
+    first = "A"
+    second = "B"
+    third = "C"
+    llist.push(first)
+    llist.insert_end(second)
+    llist.insert_end(third)
+    llist.printList()
+    nodeB = llist.search_node("B")
+    if nodeB:
+        print(nodeB)
+
 if __name__ == "__main__":
-    test_delete_node()
+    # test_delete_node()
+    test_search_node()
