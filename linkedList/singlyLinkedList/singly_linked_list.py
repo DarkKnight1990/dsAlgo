@@ -13,6 +13,9 @@ class Node:
     def get_data(self):
         return self._data
 
+    def __str__(self):
+        return self.get_data()
+
 
 class LinkedList:
     def __init__(self):
@@ -139,6 +142,22 @@ class LinkedList:
             prev_node.set_next(curr_node.get_next())
             curr_node = None
         return self
+
+    def search_node(self, key):
+        """
+        Search the first occurence of the key "key"
+        If found return pointer to that Node
+        Else None
+        """
+        curr_node = self.get_head()
+        if curr_node is None:
+            print("LinkedList is not initialised")
+            return None
+        while(curr_node):
+            if curr_node.get_data() == key:
+                return curr_node
+            curr_node = curr_node.get_next()
+        return None
 
 
 if __name__ == "__main__":

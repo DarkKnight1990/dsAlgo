@@ -1,3 +1,4 @@
 dsAlgoEnv/
 *.pyc
 __pycache__/
+requirements.txt
