@@ -1,0 +1,5 @@
+Recursion:
+
+1. Same operations performed multiple times with different inputs.
+2. We make the problem smaller in each iteration.
+3. Base condition is necessary, otherwise infinite loop runs.
